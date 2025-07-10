@@ -61,8 +61,6 @@ class MainActivity : ComponentActivity() {
                             finish()
                         } else {
                             Log.d(tag, "Authenticated. Navigating to Home Screen.")
-                            // No explicit navigation needed here if ROUTE_HOME is the startDestination.
-                            // The NavHost will automatically display it.
                         }
                     }
 
@@ -76,8 +74,6 @@ class MainActivity : ComponentActivity() {
                         composable(Constants.ROUTE_HOME) {
                             HomeScreen(
                                 navController = navController
-                                // REMOVED: authRepository = authRepository,
-                                // REMOVED: spotifyUserService = spotifyUserService,
                             )
                         }
 
@@ -85,8 +81,6 @@ class MainActivity : ComponentActivity() {
                         composable(Constants.ROUTE_PLAYLISTS) {
                             PlaylistsScreen(
                                 navController = navController
-                                // REMOVED: authRepository = authRepository,
-                                // REMOVED: spotifyUserService = spotifyUserService,
                             )
                         }
 
@@ -94,8 +88,6 @@ class MainActivity : ComponentActivity() {
                         composable(Constants.ROUTE_SAVED_TRACKS) {
                             SavedTracksScreen(
                                 navController = navController
-                                // REMOVED: authRepository = authRepository,
-                                // REMOVED: spotifyUserService = spotifyUserService,
                             )
                         }
 

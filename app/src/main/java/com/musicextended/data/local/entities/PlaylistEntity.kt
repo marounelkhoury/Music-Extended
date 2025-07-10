@@ -3,11 +3,11 @@ package com.musicextended.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.musicextended.network.Image // Image is in 'network'
-import com.musicextended.model.SimplifiedPlaylist // SimplifiedPlaylist is in 'model'
-import com.musicextended.model.User // User is used for owner in SimplifiedPlaylist
-import com.musicextended.network.ExternalUrls // ExternalUrls is in 'network'
-import com.musicextended.model.TracksInfo // TracksInfo is in 'model'
+import com.musicextended.model.SimplifiedPlaylist
+import com.musicextended.model.TracksInfo
+import com.musicextended.model.User
+import com.musicextended.network.ExternalUrls
+import com.musicextended.network.Image
 
 @Entity(tableName = "playlists")
 data class PlaylistEntity(
@@ -43,8 +43,6 @@ data class PlaylistEntity(
 
     // --- Conversion from PlaylistEntity back to SimplifiedPlaylist (if needed) ---
     fun toSimplifiedPlaylist(): SimplifiedPlaylist {
-        // Reconstruct SimplifiedPlaylist from the entity.
-        // Create a 'User' object based on the fields available in PlaylistEntity
         val ownerUser = User(
             id = this.ownerId, // Non-nullable in User model
             display_name = this.ownerDisplayName, // Nullable in User model

@@ -14,20 +14,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState // NEW IMPORT
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll // NEW IMPORT
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -54,8 +52,6 @@ import coil.compose.AsyncImage
 import com.musicextended.MusicExtendedApplication
 import com.musicextended.viewmodel.AIGenerationViewModel
 import kotlinx.coroutines.delay
-import com.musicextended.model.AIGeneratedPlaylist
-import com.musicextended.model.GeneratedSongSuggestion
 
 @Composable
 fun AIGenerationScreen(navController: NavController) {
@@ -244,27 +240,6 @@ fun AIGenerationScreen(navController: NavController) {
                         modifier = Modifier.padding(bottom = 8.dp),
                         color = MaterialTheme.colorScheme.onBackground
                     )
-
-                    // NEW: Use a fixed height for the LazyColumn or remove it
-                    // For a completely free-scrolling layout, it's better to make the parent Column scrollable
-                    // and let LazyColumn size naturally based on its content, or, if you want a nested scroll
-                    // effect, give the LazyColumn a fixed or constrained height.
-                    // Given your request, a single scroll for the whole screen is usually preferred.
-                    // So, we'll remove the LazyColumn and just use a Column if it's nested
-                    // within an outer verticalScroll.
-                    // However, for potentially large lists of songs, LazyColumn is still better.
-                    // The issue was the combination of weight() on parent AND LazyColumn.
-                    // Let's keep LazyColumn but ensure it doesn't take infinite height.
-
-                    // To solve the nested scrolling, the common pattern is:
-                    // Outermost Column (scrollable)
-                    //   ... fixed header content ...
-                    //   LazyColumn (content fills remaining space, but parent handles main scroll)
-
-                    // Let's revert to a simple Column for the songs part, so it flows with the main scroll
-                    // if you're unlikely to have 100s of songs generated. If you *expect* many songs,
-                    // then we'd need a different nested scrolling approach. For 5-10 songs, a simple
-                    // Column inside a scrollable parent is fine.
 
                     Column { // Changed from LazyColumn to Column to allow parent scroll
                         playlist.songs.forEach { song ->

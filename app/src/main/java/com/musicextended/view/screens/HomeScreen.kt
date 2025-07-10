@@ -26,12 +26,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import coil.compose.AsyncImage // Import AsyncImage
+import coil.compose.AsyncImage
 import com.musicextended.MusicExtendedApplication
 import com.musicextended.utils.Constants
 import com.musicextended.view.activities.AuthActivity
@@ -61,31 +60,13 @@ fun HomeScreen(
 
     val gradientColors = remember(primaryColor, onSurfaceColor) { // Re-remember if theme colors change
         listOf(
-            // Start with a darker version of your primary or background for depth
-            // Use your theme's colors or derived colors for consistency
             background.copy(alpha = 0.9f), // A slightly faded version of your background
             surfaceColor.copy(alpha = 0.8f), // A slightly lighter surface color
             primaryColor.copy(alpha = 0.6f), // Your primary color, slightly transparent
             primaryColor.copy(alpha = 0.4f)  // A more faded version of your primary color
-            // You can experiment with more colors or darker/lighter variations
-            // For example, if primary is green:
-            // Color(0xFF1DB954).darken(0.3f), // Spotify green, darkened
-            // Color(0xFF1DB954).darken(0.1f),
-            // Color(0xFF1DB954), // Actual Spotify green
-            // Color(0xFF1DB954).lighten(0.1f)
         )
     }
 
-    // You could also pick from MaterialTheme.colorScheme directly:
-    // val gradientColors = remember {
-    //     listOf(
-    //         MaterialTheme.colorScheme.background,
-    //         MaterialTheme.colorScheme.surface,
-    //         MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
-    //         MaterialTheme.colorScheme.primary.copy(alpha = 0.4f)
-    //     )
-    // }
-    // --- MODIFIED GRADIENT COLORS END ---
 
 
     // Animatable colors for the gradient

@@ -37,24 +37,20 @@ abstract class MusicExtendedDatabase : RoomDatabase() {
     abstract fun topArtistDao(): TopArtistDao
     abstract fun topTrackDao(): TopTrackDao
 
-    // Companion object to provide a singleton instance of the database
-    // This prevents multiple instances of the database from being opened simultaneously,
-    // which can be expensive and lead to errors.
+
     companion object {
         @Volatile // Make sure the INSTANCE is always up-to-date across threads
         private var INSTANCE: MusicExtendedDatabase? = null
 
         fun getDatabase(context: Context): MusicExtendedDatabase {
-            // If the INSTANCE is not null, then return it,
-            // otherwise create a new instance of the database.
+
             return INSTANCE ?: synchronized(this) { // Use synchronized to ensure thread safety
                 val instance = Room.databaseBuilder(
                     context.applicationContext, // Use application context to prevent memory leaks
                     MusicExtendedDatabase::class.java,
                     "music_extended_database" // The name of your database file
                 )
-                    // .fallbackToDestructiveMigration() // Use this only for development if you frequently change schema and don't care about data loss
-                    // Add your migration strategies here if you change the schema version later
+
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance

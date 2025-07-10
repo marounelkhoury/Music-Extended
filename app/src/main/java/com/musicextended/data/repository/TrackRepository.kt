@@ -39,7 +39,6 @@ class TrackRepository(
 
         // 2. Always attempt to refresh from network
         try {
-            // FIX: spotifyUserService now returns List<Track> directly
             val networkTracks = withContext(ioDispatcher) {
                 spotifyUserService.fetchCurrentUserSavedTracks(limit = limit, offset = offset)
             }

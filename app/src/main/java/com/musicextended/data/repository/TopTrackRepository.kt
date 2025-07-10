@@ -37,13 +37,11 @@ class TopTrackRepository(
         // Always attempt to fetch fresh data from the network
         withContext(ioDispatcher) {
             try {
-                // FIX: Explicitly pass parameters to fetchUserTopTracks
                 val response = spotifyUserService.fetchUserTopTracks(
                     timeRange = timeRange,
                     limit = limit,
                     offset = offset
                 )
-                // FIX: Add safe call for 'items' in case response.items is null
                 if (response != null && !response.items.isNullOrEmpty()) {
                     val entities = response.items.map { track ->
                         TopTrackEntity.fromTrack(track)

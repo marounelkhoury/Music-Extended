@@ -32,7 +32,6 @@ class HomeViewModel(
     private val _profileError = MutableStateFlow<String?>(null)
     val profileError: StateFlow<String?> = _profileError.asStateFlow()
 
-    // NEW: Authentication Status States
     private val _authStatus = MutableStateFlow(AuthStatus.LOADING)
     val authStatus: StateFlow<AuthStatus> = _authStatus.asStateFlow()
 
@@ -102,7 +101,6 @@ class HomeViewModel(
         }
     }
 
-    // NEW: Define the AuthStatus enum within the ViewModel
     enum class AuthStatus {
         LOADING, // Initial state, checking authentication
         AUTHENTICATED, // User is logged in and token is valid

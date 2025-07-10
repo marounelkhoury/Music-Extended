@@ -3,10 +3,10 @@ package com.musicextended.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.musicextended.network.ExplicitContent
+import com.musicextended.network.Followers
 import com.musicextended.network.Image
 import com.musicextended.network.SpotifyUserProfile
-import com.musicextended.network.Followers // Still needed for Followers object
-import com.musicextended.network.ExplicitContent // Assuming ExplicitContent is in your network package
 
 @Entity(tableName = "users")
 data class UserEntity(
@@ -20,9 +20,7 @@ data class UserEntity(
     val followersTotal: Int?,
     val imageUrl: String?,
     val lastUpdated: Long
-    // If you ever need to store explicit content settings, add them here:
-    // val explicitContentEnabled: Boolean?,
-    // val explicitContentFilterLocked: Boolean?
+
 ) {
     companion object {
         fun fromSpotifyUserProfile(userProfile: SpotifyUserProfile): UserEntity {
@@ -57,12 +55,12 @@ data class UserEntity(
             product = null, // Assuming product is not stored in UserEntity for now
             type = "user", // Assuming type is always "user" for this conversion
             uri = this.spotifyUri,
-            // FIX: Add explicit_content, providing a default if not stored in UserEntity
+
             explicit_content = ExplicitContent(
                 filter_enabled = false, // Default to false if not tracked
                 filter_locked = false   // Default to false if not tracked
-            ) // You might need to adjust this default based on how you want to handle it.
-            // If SpotifyUserProfile's explicit_content is nullable, you could pass null.
+            )
+
         )
     }
 }
